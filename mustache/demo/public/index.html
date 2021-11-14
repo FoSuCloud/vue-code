@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"> i am app </div>
+<script type="module">
+    import {engine} from '../src/index.js'
+    // let str = ' i am {{name}}, age {{age}}'
+    let str = `
+        <ul>
+           {{a.b.c}}
+           {{#arr}}
+            <li>名字{{name}}</li>
+            <li>年龄{{age}}</li>
+            <p>
+                {{#list}}
+                 <p>我是列表元素；{{.}}</p>
+                {{/list}}
+            </p>
+            {{/arr}}
+        </ul>
+    `;
+    // 判断 # 和 /
+    let data = {a:{b:{c:'i am c'}},arr:[{name:'yiye',age:11,list:[1,2,3]},{name:'aaa',age:22,list:[12,21,31]}]}
+    let instance = new engine()
+    let app = document.getElementById('app')
+    app.innerHTML = instance.render(str,data)
+</script>
+</body>
+</html>

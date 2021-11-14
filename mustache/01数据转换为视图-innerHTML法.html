@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="list">
+    </div>
+    <script>
+        let list = document.getElementById('list')
+        let arr =[{name:'a'},{name:'b'}]
+        for(let i in arr){
+            list.innerHTML+=[
+                '<p>'+arr[i].name+'</p>',
+                '<span>'+i+'</span>'
+            ].join('')
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/template" id="tmp">
+    <h1>my name is {{name}},my age is {{age}}</h1>
+</script>
+<script>
+    let app = document.getElementById('app')
+    let obj ={
+        name:'yiye',
+        age:33
+    }
+    let str = document.getElementById('tmp').innerHTML;
+    let reg = /\{\{(\w+)\}\}/g
+    str = render(str,obj)
+    app.innerHTML+= str;
+
+    function render(str, data){
+        // 使用正则和replace 实现智能替换
+        return str.replace(reg,function (match,...args){
+            let param  = args[0]; // 匹配到的{{}}内部文本
+            if(param){
+                return data[param]
+            }
+            return ''
+        })
+    }
+    /*
+    * todo 但是遇到复杂的，存在前后对应组的就无法使用正则了
+    *  例如 {{#arr}} <li></li> {{/arr}}
+    * 无法使用正则去匹配这种前后对应的！
+    * 所以还是要通过ast先生成抽象语法树
+    * */
+</script>
+</body>
+</html>

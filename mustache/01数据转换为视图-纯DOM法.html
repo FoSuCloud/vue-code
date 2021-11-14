@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="list">
+    </div>
+    <script>
+        let list = document.getElementById('list')
+        let arr =[{name:'a'},{name:'b'}]
+        for(let i in arr){
+            let p = document.createElement('p')
+            p.innerText = arr[i].name
+            list.appendChild(p)
+        }
+    </script>
+</body>
+</html>

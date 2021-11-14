@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="list">
+</div>
+<script type="module">
+    import mustache from "./lib/mustache.js";
+    // 循环对象数组
+    let arr =[{name:'a'},{name:'b'}]
+    let view = {
+        arr:arr
+    }
+    let code = `
+        {{#arr}}
+        <p>{{name}}</p>
+        {{/arr}}
+    `
+    let result = mustache.render(code,view)
+    let list = document.getElementById('list')
+    list.innerHTML += result;
+
+    // 添加
+    let obj = {name:'haha',age:3}
+    let code1 = `<div>name:{{name}},年龄：{{age}}</div>`
+    let result1 = mustache.render(code1,obj)
+    list.innerHTML += result1;
+
+    // 循环简单数组, 使用 . 表示数组元素
+    let arr1 = ['🍎','女朋友']
+    let obj1 = {
+        other:arr1
+    }
+    let code2 = `<ul>{{#other}}<li>{{.}}</li>{{/other}}</ul>`
+    let result2 = mustache.render(code2,obj1)
+    list.innerHTML += result2;
+
+    // 多层嵌套
+    let arr2 = [{name:'1',jobs:['打球','拖地']},{name:'我是',jobs:['hihi','哈哈']}]
+    let obj2 = {
+        all: arr2
+    }
+    let code3 = `
+        {{#all}}
+            <div>{{name}}</div>
+            <ul class="arr">
+               {{#jobs}}
+                    <li>{{.}}</li>
+               {{/jobs}}
+            </ul>
+        {{/all}}
+    `
+    let result3 = mustache.render(code3,obj2)
+    list.innerHTML += result3;
+
+    // 布尔值，为false不渲染！
+    let bool = {
+        b: false
+    }
+    let code4 = `<div class="bool">{{#b}}<p>bool值</p>{{/b}}</div>`
+    let result4 = mustache.render(code4,bool)
+    list.innerHTML += result4;
+    setTimeout(()=>{
+        bool.b = true;
+        let result4 = mustache.render(code4,bool)
+        list.innerHTML += result4;
+    },1000)
+</script>
+</body>
+</html>
